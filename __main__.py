@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup, Tag
 import hashlib
+import random
 import sys
 import time
 
@@ -18,7 +19,7 @@ hashtexts = [
     '7107eba90dac7e8e5b05d155a67783117a7ffefea59c821c39b268cd16724ee5',
 ]
 
-alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz !';
+alphabet = list('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~!@#$%^&*()_+`1234567890-=[]{}\\|;",./<>? ')
 
 def nest_tags(names):
     current = Tag(name=names[0])
@@ -44,9 +45,13 @@ def output_overwrite(text):
 
 values = []
 for hash in hashtexts:
+    random.shuffle(alphabet)
+
     for candidate in alphabet:
         output_overwrite("".join(values + [candidate]))
-        time.sleep(0.02) # make it a little bit more exciting
+
+        time.sleep(0.015) # make it a little bit more exciting
+
         text = get_hashtext(values, candidate)
         if text == hash:
             values.append(candidate)
