@@ -46,7 +46,7 @@ values = []
 for hash in hashtexts:
     for candidate in alphabet:
         output_overwrite("".join(values + [candidate]))
-        time.sleep(0.01)
+        time.sleep(0.02) # make it a little bit more exciting
         text = get_hashtext(values, candidate)
         if text == hash:
             values.append(candidate)
